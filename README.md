@@ -1,28 +1,122 @@
-# Tablod - Fullstack
+# RideAwareFullStack
 
-## We have two sprints to implement a production ready Tabloid application.
+This is version 2 of Front-End Capstone RideAware.
+This will use FireBase for authentication.
+It will use SQL for database.
+It will use React for FrontEnd. (possible refactor of fronEnd to hook up to BackEnd).
 
-### Getting Started
+This will also include features for attendance record keeping.
 
-1. Pull down this repo
+## ERD 
+table users {
+  id int
+  administrator false
+  locationId int
+  avatarURL varchar
+  mapLocation varchar
+}
 
-1. Run the two scripts that are in the SQL folder. These will create the Tabloid database and add some test data. The database it creates is identitical to the prototype from the last MVC sprint, except now we're capturing the `FirebaseUserId` in the UserProfile table
+table studentdUser {
+  id int
+  userId int
+  primaryUser boolean
+  studentId int
+  expire boolean
+  expireDate datetime
+}
 
-1. Everyone on the team should create their own Firebase project. **Each team member** should do the follow steps in the firebase console:
+table students {
+  id int
+  name varchar
+  teacherId int
+  avatarURL varchar
+}
 
-   - Go to [Firebase](https://console.firebase.google.com/u/0/) and add a new project. You can name it whatever you want (Tabloid is a good name)
-   - Go to the Authentication tab, click "Set up sign in method", and enable the Username and Password option.
-   - Add at least two new users in firebase. Use email addresses that you find in the UserProfile table of your SQL Server database
-   - Once firebase creates a UID for these users, copy the UID from firebase and update the `FirebaseUserId` column for the same users in your SQL Server database.
-   - Click the Gear icon in the sidebar to go to Project Settings. You'll need the information on this page for the next few steps
+table carUser {
+  id int
+  userId int
+  carId int
+  primaryUser boolean
+  expire boolean
+  expireDate datetime
+}
 
-1. Go to the `appSettings.Local.json.example` file. Replace the value for FirebaseProjectId with your own
+table cars {
+  id int
+  make varchar
+  model varchar
+  color varchar
+  avatarURL varchar
+}
 
-1. Rename the `appSettings.Local.json.example` file to remove the `.example` extension. This file should now just be called `appSettings.Local.json`
+table location {
+  id int
+  mapLocation varchar
+}
 
-1. Open your `client` directory in VsCode. Open the `.env.local.example` file and replace `__YOUR_API_KEY_HERE__` with your own firebase Web API Key
+table studentRide {
+  id int
+  rideId int
+  studentId int
+}
 
-1. Rename the `.env.local.example` file to remove the `.example` extension. This file should now just be called `.env.local`
+table rides {
+  id int
+  userId int
+  date varchar
+  timeStamp varchar
+  editTimeStamp varchar
+  locationId int
+}
 
-1. Install your dependencies by running `npm install` from the same directory as your `package.json` file
-# Tabloid
+table class {
+  id int
+  userId int
+  Schedule datetime
+  locationId int
+}
+
+table classStudents { 
+  id Int
+  classId Int
+  studentId int
+}
+
+table attendenceRecord {
+  id int
+  date datetime
+  classId int
+}
+
+table attendenceRecordStudents {
+  id int
+  attendenceRecordId int
+  studentId int
+  present bool
+}
+
+Ref: "rides"."locationId" < "location"."id"
+
+Ref: "rides"."id" < "studentRide"."rideId"
+
+Ref: "studentRide"."studentId" < "students"."id"
+
+Ref: "studentdUser"."userId" < "users"."id"
+
+Ref: "students"."id" < "studentdUser"."studentId"
+
+Ref: "carUser"."userId" < "users"."id"
+
+Ref: "carUser"."carId" < "cars"."id"
+
+Ref: "class"."userId" < "users"."id"
+
+Ref: "classStudents"."classId" < "class"."id"
+
+Ref: "classStudents"."studentId" < "students"."id"
+
+Ref: "class"."locationId" < "location"."id"
+
+Ref: "attendenceRecord"."classId" < "classStudents"."classId"
+
+Ref: "attendenceRecordStudents"."attendenceRecordId" < "attendenceRecord"."id"
