@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -38,6 +39,12 @@ namespace Tabloid.Models
         [Required]
         public int UserTypeId { get; set; }
         public UserType UserType { get; set; }
+
+        public virtual List<StudentGuardian> StudentGuardian  { get; set; }
+
+        public virtual List<CarUser> CarUser { get; set; }
+        
+        public virtual List<Ride> Rides { get; set; }
 
         public string FullName
         {

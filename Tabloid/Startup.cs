@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Tabloid.Data;
+using Microsoft.OpenApi.Models;
 
 namespace Tabloid
 {
@@ -58,6 +59,11 @@ namespace Tabloid
                 });
 
             services.AddControllers();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BangazonAPI", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +76,14 @@ namespace Tabloid
 
             //related to CORS
             //app.UseCors(MyAllowSpecificOrigins);
+
+            app.UseSwagger();
+
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "RideAware V1");
+            });
 
             app.UseHttpsRedirection();
 
