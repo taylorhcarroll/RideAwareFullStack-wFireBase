@@ -17,7 +17,7 @@ namespace Tabloid.Models
         [DataType(DataType.Date)]
         public DateTime Year { get; set; }
 
-        public string AvatarUrl { get; set; }
+        public string ImageLocation { get; set; }
 
     }
 }

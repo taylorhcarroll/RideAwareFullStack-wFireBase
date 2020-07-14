@@ -63,5 +63,7 @@ namespace Tabloid.Data
                 );
         }
 
+        public DbSet<Tabloid.Models.Car> Car { get; set; }
+
     }
 }
