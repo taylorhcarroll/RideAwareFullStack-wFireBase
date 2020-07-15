@@ -10,10 +10,14 @@ namespace Tabloid.Data
 
         public DbSet<UserProfile> UserProfile { get; set; }
         public DbSet<UserType> UserType { get; set; }
+        public DbSet<Student> Student { get; set; }
+        public DbSet<Car> Car { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+           
 
             //modelBuilder.Entity<UserProfile>()
             //.HasOne(m => m.Mentor)
@@ -44,7 +48,7 @@ namespace Tabloid.Data
                     CreateDateTime = new DateTime(2019, 08, 29),
                     ImageLocation = "placeholder1.jpeg",
                     UserTypeId = 1,
-                    FirebaseUserId = "TBD",
+                    FirebaseUserId = "AM2N3SOStGX2rheUhxk6eEWvmsi2",
 
                 },
                  new UserProfile()
@@ -57,13 +61,11 @@ namespace Tabloid.Data
                      CreateDateTime = new DateTime(2020, 02, 17),
                      ImageLocation = "placeholder2.jpeg",
                      UserTypeId = 2,
-                     FirebaseUserId = "TBD",
+                     FirebaseUserId = "RdrLC9WsHrWtSkK5F1uDKmgdSAz1",
 
                  }
                 );
         }
-
-        public DbSet<Tabloid.Models.Car> Car { get; set; }
 
     }
 }
