@@ -12,6 +12,9 @@ namespace Tabloid.Data
         public DbSet<UserType> UserType { get; set; }
         public DbSet<Student> Student { get; set; }
         public DbSet<Car> Car { get; set; }
+        public DbSet<CarUser> CarUser { get; set; }
+        public DbSet<StudentGuardian> StudentGuardian { get; set; }
+        public DbSet<Ride> Ride { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
